@@ -166,7 +166,7 @@
 
         .hidden-section { display: none !important; }
         
-        .nav-active { color: var(--pink-main) !important; background-color: var(--pink-bg); }
+        .nav-active { color: var(--pink-main) !important; background-color: rgba(255, 255, 255, 0.6); }
         
         /* إعدادات السلايدر الخاص بمعرض الصور */
         .slider-container { position: relative; width: 100%; height: 350px; display: flex; align-items: center; justify-content: center; perspective: 1000px; }
@@ -192,8 +192,8 @@
     <!-- Particle Canvas for Hearts (Light Theme) -->
     <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-70"></canvas>
 
-    <!-- مشغل الموسيقى الأساسي (الآن مخفي في الخلفية ويتم التحكم فيه من الصفحة الأولى) -->
-    <audio id="main-audio" src="song.mp3" loop preload="auto"></audio>
+    <!-- مشغل الموسيقى الأساسي (تم إضافة رابط أغنية تامر عاشور) -->
+    <audio id="main-audio" src="https://res.cloudinary.com/dyhlzplzb/video/upload/v1793862637/Tamer_Ashour_-_Khaleeny_Fi_Hodnak___%D8%AA%D8%A7%D9%85%D8%B1_%D8%B9%D8%A7%D8%B4%D9%88%D8%B1_-_%D8%AE%D9%84%D9%8A%D9%86%D9%8A_%D9%81%D9%8A_%D8%AD%D8%B6%D9%86%D9%83_320k_k30wtd.mp3" loop preload="auto"></audio>
     
     <!-- Audio Element for Hidden Voice Note -->
     <audio id="voice-note-audio" src="record.mp3" preload="auto"></audio>
@@ -258,12 +258,12 @@
 
 
     <!-- ==================== MAIN APP CONTENT ==================== -->
-    <div id="main-app" class="hidden-section w-full h-full relative z-10 opacity-0 transition-opacity duration-1000 pb-28">
+    <div id="main-app" class="hidden-section w-full h-full relative z-10 opacity-0 transition-opacity duration-1000">
 
         <div id="views">
             
             <!-- 1. Home View -->
-            <div id="view-home" class="page-section min-h-screen flex flex-col items-center justify-center px-6">
+            <div id="view-home" class="page-section h-[100dvh] overflow-hidden flex flex-col items-center justify-center pb-12 px-6">
                 <div class="animate-fade-in text-center max-w-3xl w-full main-card py-8 px-6 md:px-8">
                     <i data-lucide="sparkles" class="w-8 h-8 text-[#e11d48] mx-auto mb-4"></i>
                     <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-3 tracking-tight">
@@ -284,7 +284,7 @@
                                 </div>
                                 <div class="flex flex-col items-start">
                                     <span class="text-slate-800 font-bold text-sm">أغنيتنا 🎵</span>
-                                    <span class="text-[#0284c7] text-xs font-bold">عالمنا الخاص</span>
+                                    <span class="text-[#0284c7] text-xs font-bold">خليني في حضنك - تامر عاشور ❤️</span>
                                 </div>
                             </div>
                             <button id="main-play-btn" onclick="toggleMainAudio()" class="w-10 h-10 rounded-full bg-white border-2 border-slate-200 hover:border-[#e11d48] flex items-center justify-center transition-all focus:outline-none text-[#e11d48]">
@@ -305,7 +305,7 @@
             </div>
 
             <!-- 2. Our Time View -->
-            <div id="view-our_time" class="page-section hidden-section min-h-screen flex flex-col items-center justify-center px-4 pt-10">
+            <div id="view-our_time" class="page-section hidden-section min-h-[100dvh] pb-32 flex flex-col items-center justify-start px-4 pt-[12vh]">
                 <div class="animate-fade-in max-w-lg w-full main-card p-6 md:p-8 relative">
                     <div class="text-center mb-8">
                         <h2 class="text-2xl md:text-3xl font-bold text-slate-800">
@@ -364,7 +364,7 @@
             </div>
 
             <!-- 3. Special View -->
-            <div id="view-special" class="page-section hidden-section min-h-screen pt-16 px-6 max-w-5xl mx-auto flex flex-col items-center">
+            <div id="view-special" class="page-section hidden-section min-h-[100dvh] pb-32 pt-16 px-6 max-w-5xl mx-auto flex flex-col items-center">
                 <div class="animate-fade-in text-center mb-10">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-[#0284c7] mb-3">ليه انتي مفيش زيك؟</h2>
                     <div class="h-1.5 w-16 bg-[#bae6fd] rounded-full mx-auto"></div>
@@ -381,7 +381,7 @@
             </div>
 
             <!-- 4. Story View -->
-            <div id="view-story" class="page-section hidden-section min-h-screen pt-16 px-6 max-w-3xl mx-auto flex flex-col items-center">
+            <div id="view-story" class="page-section hidden-section min-h-[100dvh] pb-32 pt-16 px-6 max-w-3xl mx-auto flex flex-col items-center">
                 <div class="animate-fade-in text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-[#e11d48] mb-3">حكايتنا الحلوة</h2>
                     <div class="h-1.5 w-16 bg-[#ffe4e6] rounded-full mx-auto"></div>
@@ -419,7 +419,7 @@
             </div>
 
             <!-- 5. Gallery View (Slider) -->
-            <div id="view-gallery" class="page-section hidden-section min-h-screen flex flex-col items-center justify-center px-6">
+            <div id="view-gallery" class="page-section hidden-section min-h-[100dvh] pb-32 pt-[10vh] flex flex-col items-center justify-start px-6">
                 <div class="animate-fade-in text-center mb-8 w-full">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3">أحلى ذكرياتنا</h2>
                     <div class="h-1.5 w-16 bg-[#cbd5e1] rounded-full mx-auto"></div>
@@ -427,14 +427,12 @@
                 
                 <!-- غلاف السلايدر الذي يحتوي على الصور وزر البصمة -->
                 <div class="relative w-full max-w-3xl mb-6">
-                    <!-- تمت إضافة كلاس blurred-gallery هنا لتشغيل البلور الافتراضي -->
                     <div class="animate-fade-in w-full slider-container blurred-gallery" id="gallery-slider" dir="ltr">
                         <!-- Injected by JS -->
                     </div>
                     
-                    <!-- زر وشاشة البصمة المغطية للصور -->
                     <div id="fingerprint-overlay" class="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#f0f7ff]/60 backdrop-blur-[4px] rounded-[30px] border-2 border-dashed border-[#bae6fd] transition-opacity duration-1000">
-                        <button onclick="unlockGallery()" class="flex flex-col items-center justify-center gap-3 p-6 bg-white rounded-3xl shadow-xl border-2 border-[#bae6fd] hover:-translate-y-2 transition-transform duration-300 group focus:outline-none">
+                        <button onclick="unlockGallery()" class="flex flex-col items-center justify-center gap-3 p-6 bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border-2 border-[#bae6fd] hover:-translate-y-2 transition-transform duration-300 group focus:outline-none">
                             <div class="w-16 h-16 rounded-full bg-[#e0f2fe] flex items-center justify-center group-hover:bg-[#0284c7] transition-colors duration-300">
                                 <i data-lucide="fingerprint" class="w-9 h-9 text-[#0284c7] group-hover:text-white transition-colors duration-300"></i>
                             </div>
@@ -454,7 +452,7 @@
             </div>
 
             <!-- 6. Messages View (Typewriter) -->
-            <div id="view-messages" class="page-section hidden-section min-h-screen pt-16 px-6 flex flex-col items-center justify-center">
+            <div id="view-messages" class="page-section hidden-section h-[100dvh] overflow-hidden pt-16 px-6 flex flex-col items-center justify-center">
                 <div class="animate-fade-in main-card p-10 max-w-2xl mx-auto text-center w-full">
                     <div class="w-14 h-14 bg-[#e0f2fe] rounded-full flex items-center justify-center mx-auto mb-6">
                         <i data-lucide="message-circle-heart" class="w-7 h-7 text-[#0284c7]"></i>
@@ -476,8 +474,8 @@
             </div>
 
             <!-- 7. Surprise View -->
-            <div id="view-surprise" class="page-section hidden-section min-h-screen pt-16 px-6 flex flex-col items-center justify-center">
-                <div class="animate-fade-in w-full max-w-md text-center flex-grow flex flex-col justify-center">
+            <div id="view-surprise" class="page-section hidden-section h-[100dvh] overflow-hidden pt-16 px-6 flex flex-col items-center justify-center">
+                <div class="animate-fade-in w-full max-w-md text-center flex-grow flex flex-col justify-center pb-24">
                     
                     <div id="surprise-closed" class="main-card p-12 text-center cursor-pointer transition-transform" onmouseover="this.classList.add('shake-animation')" onanimationend="this.classList.remove('shake-animation')">
                         <div class="w-20 h-20 mx-auto mb-6 rounded-full border-2 border-[#e11d48] flex items-center justify-center bg-[#ffe4e6]">
@@ -515,28 +513,28 @@
 
         </div> <!-- End Views -->
 
-        <!-- Light Theme Bottom Nav Bar -->
+        <!-- Glassmorphism Bottom Nav Bar -->
         <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-[400px]">
-            <div class="bg-white border-2 border-slate-100 rounded-full px-4 py-2.5 flex items-center justify-between shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
-                <button onclick="navigate('home')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-400 hover:bg-slate-50" data-target="home">
+            <div class="bg-white/30 backdrop-blur-2xl border border-white/60 rounded-full px-4 py-2.5 flex items-center justify-between shadow-[0_8px_32px_rgba(2,132,199,0.25)]">
+                <button onclick="navigate('home')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-500 hover:bg-white/70" data-target="home">
                     <i data-lucide="home" class="w-5 h-5"></i>
                 </button>
-                <button onclick="navigate('our_time')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-400 hover:bg-slate-50" data-target="our_time">
+                <button onclick="navigate('our_time')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-500 hover:bg-white/70" data-target="our_time">
                     <i data-lucide="clock" class="w-5 h-5"></i>
                 </button>
-                <button onclick="navigate('special')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-400 hover:bg-slate-50" data-target="special">
+                <button onclick="navigate('special')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-500 hover:bg-white/70" data-target="special">
                     <i data-lucide="star" class="w-5 h-5"></i>
                 </button>
-                <button onclick="navigate('story')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-400 hover:bg-slate-50" data-target="story">
+                <button onclick="navigate('story')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-500 hover:bg-white/70" data-target="story">
                     <i data-lucide="book-open" class="w-5 h-5"></i>
                 </button>
-                <button onclick="navigate('gallery')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-400 hover:bg-slate-50" data-target="gallery">
+                <button onclick="navigate('gallery')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-500 hover:bg-white/70" data-target="gallery">
                     <i data-lucide="camera" class="w-5 h-5"></i>
                 </button>
-                <button onclick="navigate('messages')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-400 hover:bg-slate-50" data-target="messages">
+                <button onclick="navigate('messages')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-500 hover:bg-white/70" data-target="messages">
                     <i data-lucide="message-circle-heart" class="w-5 h-5"></i>
                 </button>
-                <button onclick="navigate('surprise')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-400 hover:bg-slate-50" data-target="surprise">
+                <button onclick="navigate('surprise')" class="nav-btn p-2.5 rounded-full flex flex-col items-center transition-all text-slate-500 hover:bg-white/70" data-target="surprise">
                     <i data-lucide="gift" class="w-5 h-5"></i>
                 </button>
             </div>
@@ -668,7 +666,7 @@
                 mainDiscIcon.style.opacity = '0';
                 mainDiscIcon.classList.remove('animate-spin-slow');
             } else {
-                mainAudio.play().catch(e => console.log("تأكد من إضافة الأغنية باسم song.mp3", e));
+                mainAudio.play().catch(e => console.log("خطأ في تشغيل الأغنية", e));
                 isMainAudioPlaying = true;
                 mainPlayIcon.setAttribute('data-lucide', 'pause');
                 mainMusicIcon.style.opacity = '0';
@@ -758,6 +756,14 @@
                 stopTypewriter();
             }
 
+            // التحكم في السكرول (منعه في الصفحات القصيرة وتشغيله في الطويلة)
+            const noScrollPages = ['home', 'messages', 'surprise'];
+            if (noScrollPages.includes(pageId)) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -781,11 +787,10 @@
         });
 
         const galleryImages = [
-            { src: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=800", cap: "ورد يليق بيكي وبحلاوتك" },
-            { src: "https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&q=80&w=800", cap: "كل غروب بيبقى أحلى وانتي معايا" },
-            { src: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=800", cap: "انتي بتنوري حياتي" },
-            { src: "https://images.unsplash.com/photo-1506506041697-3f309d575798?auto=format&fit=crop&q=80&w=800", cap: "أجمل صدفة" },
-            { src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=800", cap: "ضحكتك بالدنيا" }
+            { src: "https://res.cloudinary.com/dyhlzplzb/image/upload/v1793862673/IMG-20261103-WA0021_kcvay4.jpg", cap: "أجمل صدفة في حياتي" },
+            { src: "https://res.cloudinary.com/dyhlzplzb/image/upload/v1793862769/20260929_193829_g4x0ag.jpg", cap: "كل لحظة معاكي بتفرحني" },
+            { src: "https://res.cloudinary.com/dyhlzplzb/image/upload/v1793862741/Snapchat-2017940250_ufyztw.jpg", cap: "انتي بتنوري دنيتي" },
+            { src: "https://res.cloudinary.com/dyhlzplzb/image/upload/v1793862740/Snapchat-1351979953_jdm2zs.jpg", cap: "ضحكتك بالدنيا" }
         ];
         
         let currentSlide = 0;
@@ -800,7 +805,7 @@
                 el.innerHTML = `<img src="${img.src}" />`;
                 el.onclick = () => {
                     if (currentSlide === i) {
-                        openLightbox(img.src, img.cap); // فتح الصورة إذا كانت في المنتصف بالفعل
+                        openLightbox(img.src, img.cap); 
                     } else {
                         currentSlide = i;
                         updateSlider();
@@ -814,26 +819,22 @@
         function updateSlider() {
             const slides = document.querySelectorAll('.slide-item');
             slides.forEach((slide, i) => {
-                // الوضع الافتراضي للصور البعيدة
                 slide.style.transform = 'translateX(0) scale(0.5)';
                 slide.style.opacity = '0';
                 slide.style.zIndex = '0';
                 slide.style.pointerEvents = 'none';
 
                 if (i === currentSlide) {
-                    // الصورة الأساسية في المنتصف
                     slide.style.transform = 'translateX(0) scale(1)';
                     slide.style.opacity = '1';
                     slide.style.zIndex = '10';
                     slide.style.pointerEvents = 'auto';
                 } else if (i === currentSlide - 1) {
-                    // الصورة التي على اليسار
                     slide.style.transform = 'translateX(-65%) scale(0.8)';
                     slide.style.opacity = '0.7';
                     slide.style.zIndex = '5';
                     slide.style.pointerEvents = 'auto';
                 } else if (i === currentSlide + 1) {
-                    // الصورة التي على اليمين
                     slide.style.transform = 'translateX(65%) scale(0.8)';
                     slide.style.opacity = '0.7';
                     slide.style.zIndex = '5';
@@ -843,7 +844,6 @@
             captionEl.innerText = galleryImages[currentSlide].cap;
         }
 
-        // إضافة خاصية السحب (Swipe) للتنقل باللمس في الموبايل
         let touchStartX = 0;
         let touchEndX = 0;
         
@@ -857,10 +857,10 @@
         }, {passive: true});
         
         function handleSwipe() {
-            if (touchEndX < touchStartX - 40) { // سحب لليسار
+            if (touchEndX < touchStartX - 40) { 
                 if (currentSlide < galleryImages.length - 1) { currentSlide++; updateSlider(); }
             }
-            if (touchEndX > touchStartX + 40) { // سحب لليمين
+            if (touchEndX > touchStartX + 40) { 
                 if (currentSlide > 0) { currentSlide--; updateSlider(); }
             }
         }
@@ -888,7 +888,6 @@
             
             let unlocked = false;
             
-            // محاولة تشغيل بصمة التليفون الحقيقية عبر WebAuthn
             if (window.PublicKeyCredential) {
                 try {
                     const isAvailable = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
@@ -905,15 +904,13 @@
                                 timeout: 60000
                             }
                         });
-                        unlocked = true; // تمت المصادقة بنجاح
+                        unlocked = true; 
                     }
                 } catch(e) {
                     console.log("Biometric auth cancelled or failed", e);
-                    // لن نقوم بوضع Alert هنا حتى تظهر شاشة كلمة السر كبديل صامت
                 }
             }
             
-            // بديل في حال رفض البصمة أو المتصفح لا يدعمها
             if (!unlocked) {
                 const pass = prompt("ميزة البصمة مش مدعومة أو اتلغت، اكتبي كلمة السر الأساسية عشان تفتحي الصور:");
                 if (pass === SECRET_PASSWORD) {
@@ -923,14 +920,12 @@
                 }
             }
             
-            // إذا تم الفتح (سواء بالبصمة أو كلمة السر)
             if (unlocked) {
                 isGalleryUnlocked = true;
                 const overlay = document.getElementById('fingerprint-overlay');
                 const slider = document.getElementById('gallery-slider');
                 const caption = document.getElementById('slider-caption');
                 
-                // تشغيل الأنيميشن لإخفاء زر البصمة وإظهار الصور والنص
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.style.display = 'none';
@@ -977,7 +972,6 @@
         function createParticle(isBurst = false, x = null, y = null) {
             const size = isBurst ? Math.random() * 8 + 3 : Math.random() * 3 + 1.5;
             const isPink = Math.random() > 0.5;
-            // Pink or Light Blue hearts
             const r = isPink ? 225 : 2;
             const g = isPink ? 29  : 132;
             const b = isPink ? 72  : 199;
