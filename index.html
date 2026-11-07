@@ -167,26 +167,45 @@
         .hidden-section { display: none !important; }
         .nav-active { color: var(--pink-main) !important; background-color: rgba(255, 255, 255, 0.6); }
         
-        /* إعدادات السلايدر الخاص بمعرض الصور */
-        .slider-container { 
-            position: relative; width: 100%; height: 430px; display: flex; align-items: center; justify-content: center; perspective: 1200px;
-            touch-action: none; /* يمنع السكرول العشوائي للمتصفح عند لمس السلايدر */
+        /* === إعدادات معرض الصور (نظام القائمة العمودية) === */
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            width: 100%;
         }
-        .slide-item { 
-            position: absolute; left: 0; right: 0; margin: auto; /* لضمان التمركز الدقيق في كل الشاشات */
-            width: 280px; height: 400px; border-radius: 20px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
-            cursor: pointer; border: 4px solid white; box-shadow: 0 15px 35px rgba(0,0,0,0.15); overflow: hidden; background: #fff; 
+        .gallery-item {
+            width: 100%;
+            border-radius: 20px;
+            border: 4px solid white;
+            box-shadow: 0 10px 25px rgba(2, 132, 199, 0.1);
+            overflow: hidden;
+            background: #fff;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .slide-item img { width: 100%; height: 100%; object-fit: cover; transition: filter 0.5s ease, transform 0.5s ease; }
-        
-        @media (min-width: 768px) {
-            .slider-container { height: 550px; }
-            .slide-item { width: 340px; height: 480px; }
+        .gallery-item:hover { transform: translateY(-4px); box-shadow: 0 15px 35px rgba(2, 132, 199, 0.15); }
+        .gallery-item img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: filter 0.6s ease, transform 0.6s ease;
+        }
+        .gallery-caption {
+            padding: 16px;
+            text-align: center;
+            font-weight: 800;
+            color: var(--pink-main);
+            font-size: 1.1rem;
+            transition: opacity 0.6s ease;
         }
         
         /* كلاسات البلور للصور قبل فتح البصمة */
-        .blurred-gallery .slide-item img { filter: blur(15px) !important; transform: scale(1.1); }
-        .blurred-gallery .slide-item { pointer-events: none; border-color: #cbd5e1; box-shadow: none; }
+        .blurred-gallery .gallery-item img { filter: blur(20px) !important; transform: scale(1.15); pointer-events: none; }
+        .blurred-gallery .gallery-caption { opacity: 0; }
+        .blurred-gallery .gallery-item { cursor: default; pointer-events: none; }
+        .blurred-gallery .gallery-item:hover { transform: none; box-shadow: 0 10px 25px rgba(2, 132, 199, 0.1); }
         
         /* Lightboxes */
         #lightbox { background: rgba(255,255,255,0.95); backdrop-filter: blur(5px); }
@@ -415,31 +434,33 @@
                 </div>
             </div>
 
-            <!-- 5. Gallery View (Slider) -->
+            <!-- 5. Gallery View (Vertical List) -->
             <div id="view-gallery" class="page-section hidden-section min-h-[100dvh] pb-32 pt-[10vh] flex flex-col items-center justify-start px-4">
                 <div class="animate-fade-in text-center mb-8 w-full">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-3">أحلى ذكرياتنا</h2>
                     <div class="h-1.5 w-16 bg-[#cbd5e1] rounded-full mx-auto"></div>
                 </div>
                 
-                <div class="relative w-full max-w-4xl mb-6">
-                    <div class="animate-fade-in w-full slider-container blurred-gallery" id="gallery-slider" dir="ltr">
-                        <!-- Injected by JS -->
-                    </div>
+                <div class="relative w-full max-w-md mx-auto mb-6">
                     
-                    <div id="fingerprint-overlay" class="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#f0f7ff]/70 backdrop-blur-[6px] rounded-[30px] border-2 border-dashed border-[#bae6fd] transition-opacity duration-1000">
-                        <button onclick="unlockGallery()" class="flex flex-col items-center justify-center gap-3 p-6 bg-white/95 backdrop-blur-sm rounded-3xl shadow-xl border-2 border-[#bae6fd] hover:-translate-y-2 transition-transform duration-300 group focus:outline-none">
+                    <!-- زر البصمة العائم -->
+                    <div id="fingerprint-overlay" class="sticky top-[35vh] z-30 flex justify-center transition-opacity duration-1000 pointer-events-none">
+                        <button onclick="unlockGallery()" class="pointer-events-auto flex flex-col items-center justify-center gap-3 p-6 bg-white/95 backdrop-blur-md rounded-3xl shadow-[0_15px_40px_rgba(2,132,199,0.3)] border-2 border-[#bae6fd] hover:-translate-y-2 transition-transform duration-300 group focus:outline-none">
                             <div class="w-16 h-16 rounded-full bg-[#e0f2fe] flex items-center justify-center group-hover:bg-[#0284c7] transition-colors duration-300">
                                 <i data-lucide="fingerprint" class="w-9 h-9 text-[#0284c7] group-hover:text-white transition-colors duration-300"></i>
                             </div>
                             <span class="font-bold text-slate-700 text-lg">افتحي الصور بالبصمة</span>
                         </button>
                     </div>
-                </div>
-                
-                <p id="slider-caption" class="text-center text-[#e11d48] font-bold text-lg mb-8 h-6 transition-all opacity-0"></p>
 
-                <div class="mt-4 flex justify-center w-full relative z-20">
+                    <!-- حاوية الصور -->
+                    <div class="animate-fade-in gallery-container blurred-gallery -mt-[140px]" id="gallery-container">
+                        <!-- Injected by JS -->
+                    </div>
+                    
+                </div>
+
+                <div class="mt-8 flex justify-center w-full relative z-20">
                     <button onclick="navigate('messages')" class="outline-btn flex items-center gap-2">
                         <span>كلام من القلب</span>
                         <i data-lucide="chevron-left" class="w-4 h-4"></i>
@@ -738,7 +759,7 @@
             `;
         });
 
-        // === Gallery Slider (Fixed Blur & Touch Scroll Issues) ===
+        // === Gallery (Vertical List System) ===
         const galleryImages = [
             { src: "https://res.cloudinary.com/dyhlzplzb/image/upload/v1793862673/IMG-20261103-WA0021_kcvay4.jpg", cap: "أجمل صدفة في حياتي" },
             { src: "https://res.cloudinary.com/dyhlzplzb/image/upload/v1793862769/20260929_193829_g4x0ag.jpg", cap: "كل لحظة معاكي بتفرحني" },
@@ -746,84 +767,28 @@
             { src: "https://res.cloudinary.com/dyhlzplzb/image/upload/v1793862740/Snapchat-1351979953_jdm2zs.jpg", cap: "ضحكتك بالدنيا" }
         ];
         
-        let currentSlide = 0;
         let isGalleryUnlocked = false; 
-        const sliderContainer = document.getElementById('gallery-slider');
-        const captionEl = document.getElementById('slider-caption');
+        const galleryContainer = document.getElementById('gallery-container');
 
-        function initSlider() {
-            sliderContainer.innerHTML = '';
-            galleryImages.forEach((img, i) => {
+        function initGallery() {
+            galleryContainer.innerHTML = '';
+            galleryImages.forEach((img) => {
                 const el = document.createElement('div');
-                el.className = 'slide-item';
-                el.innerHTML = `<img src="${img.src}" />`;
+                el.className = 'gallery-item';
+                el.innerHTML = `
+                    <div class="overflow-hidden">
+                        <img src="${img.src}" loading="lazy" />
+                    </div>
+                    <div class="gallery-caption">${img.cap}</div>
+                `;
                 el.onclick = () => {
                     if(!isGalleryUnlocked) return; 
-                    if (currentSlide === i) openLightbox(img.src, img.cap); 
-                    else { currentSlide = i; updateSlider(); }
+                    openLightbox(img.src, img.cap); 
                 };
-                sliderContainer.appendChild(el);
+                galleryContainer.appendChild(el);
             });
-            updateSlider();
         }
-
-        function updateSlider() {
-            const slides = document.querySelectorAll('.slide-item');
-            slides.forEach((slide, i) => {
-                slide.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-                
-                if (i === currentSlide) {
-                    slide.style.transform = 'translateX(0) scale(1)';
-                    slide.style.opacity = '1';
-                    slide.style.zIndex = '10';
-                    slide.style.pointerEvents = 'auto';
-                    slide.style.filter = 'brightness(1)';
-                } else if (i < currentSlide) {
-                    // الصور اللي عالشمال
-                    slide.style.transform = 'translateX(-75%) scale(0.85)';
-                    slide.style.opacity = (i === currentSlide - 1) ? '0.9' : '0';
-                    slide.style.zIndex = '5';
-                    slide.style.pointerEvents = (i === currentSlide - 1) ? 'auto' : 'none';
-                    slide.style.filter = 'brightness(0.6)';
-                } else if (i > currentSlide) {
-                    // الصور اللي عاليمين
-                    slide.style.transform = 'translateX(75%) scale(0.85)';
-                    slide.style.opacity = (i === currentSlide + 1) ? '0.9' : '0';
-                    slide.style.zIndex = '5';
-                    slide.style.pointerEvents = (i === currentSlide + 1) ? 'auto' : 'none';
-                    slide.style.filter = 'brightness(0.6)';
-                }
-            });
-            captionEl.innerText = galleryImages[currentSlide].cap;
-        }
-
-        let touchStartX = 0, touchEndX = 0;
-        let isSwipingSlider = false;
-        
-        sliderContainer.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].clientX;
-            isSwipingSlider = true;
-        }, {passive: true});
-        
-        sliderContainer.addEventListener('touchmove', e => {
-            if(isSwipingSlider && e.cancelable) {
-                e.preventDefault(); 
-            }
-        }, {passive: false});
-        
-        sliderContainer.addEventListener('touchend', e => {
-            isSwipingSlider = false;
-            touchEndX = e.changedTouches[0].clientX;
-            handleSwipe();
-        }, {passive: true});
-        
-        function handleSwipe() {
-            if(!isGalleryUnlocked) return; 
-            if (touchEndX < touchStartX - 40 && currentSlide < galleryImages.length - 1) { currentSlide++; updateSlider(); }
-            if (touchEndX > touchStartX + 40 && currentSlide > 0) { currentSlide--; updateSlider(); }
-        }
-
-        initSlider();
+        initGallery();
         
         // === Fingerprint ===
         async function unlockGallery() {
@@ -858,8 +823,7 @@
                 overlay.style.opacity = '0';
                 setTimeout(() => {
                     overlay.style.display = 'none';
-                    document.getElementById('gallery-slider').classList.remove('blurred-gallery');
-                    captionEl.style.opacity = '1';
+                    document.getElementById('gallery-container').classList.remove('blurred-gallery');
                 }, 500);
             }
         }
