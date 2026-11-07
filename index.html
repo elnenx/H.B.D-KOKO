@@ -283,7 +283,7 @@
         <div id="views">
             
             <!-- 1. Home View -->
-            <div id="view-home" class="page-section h-[100dvh] overflow-hidden flex flex-col items-center justify-center pb-12 px-6">
+            <div id="view-home" class="page-section min-h-[100dvh] pb-32 pt-12 flex flex-col items-center justify-center px-6">
                 <div class="animate-fade-in text-center max-w-3xl w-full main-card py-8 px-6 md:px-8">
                     <i data-lucide="sparkles" class="w-8 h-8 text-[#e11d48] mx-auto mb-4"></i>
                     <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-3 tracking-tight">
@@ -469,7 +469,7 @@
             </div>
 
             <!-- 6. Messages View (Typewriter) -->
-            <div id="view-messages" class="page-section hidden-section h-[100dvh] overflow-hidden pt-16 px-6 flex flex-col items-center justify-center">
+            <div id="view-messages" class="page-section hidden-section min-h-[100dvh] pb-32 pt-16 px-6 flex flex-col items-center justify-center">
                 <div class="animate-fade-in main-card p-10 max-w-2xl mx-auto text-center w-full">
                     <div class="w-14 h-14 bg-[#e0f2fe] rounded-full flex items-center justify-center mx-auto mb-6">
                         <i data-lucide="message-circle-heart" class="w-7 h-7 text-[#0284c7]"></i>
@@ -489,7 +489,7 @@
             </div>
 
             <!-- 7. Surprise View -->
-            <div id="view-surprise" class="page-section hidden-section h-[100dvh] overflow-hidden pt-16 px-6 flex flex-col items-center justify-center">
+            <div id="view-surprise" class="page-section hidden-section min-h-[100dvh] pb-32 pt-16 px-6 flex flex-col items-center justify-center">
                 <div class="animate-fade-in w-full max-w-md text-center flex-grow flex flex-col justify-center pb-24">
                     
                     <div id="surprise-closed" class="main-card p-12 text-center cursor-pointer transition-transform" onmouseover="this.classList.add('shake-animation')" onanimationend="this.classList.remove('shake-animation')">
@@ -736,8 +736,9 @@
 
             if(pageId === 'messages') startTypewriter(); else stopTypewriter();
 
-            const noScrollPages = ['home', 'messages', 'surprise'];
-            document.body.style.overflow = noScrollPages.includes(pageId) ? 'hidden' : '';
+            // تم إزالة الكود اللي بيقفل السكرول إجبارياً عشان ميبوظش الشاشات الصغيرة
+            document.body.style.overflow = '';
+            
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
